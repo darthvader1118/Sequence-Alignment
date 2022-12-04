@@ -2,7 +2,7 @@ import java.io.*;
 
 public class SequenceAlignment {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         File input = new File(args[0]);
         try(BufferedReader br = new BufferedReader(new FileReader(input))){
             String line;
@@ -14,6 +14,15 @@ public class SequenceAlignment {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        FileWriter writetoOuptut = new FileWriter("output.txt");
+
+        BufferedWriter writer = new BufferedWriter(writetoOuptut);
+        writer.write("");
+
+        writer.close();
+
+
 
     }
 }
