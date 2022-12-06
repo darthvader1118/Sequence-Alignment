@@ -1,6 +1,13 @@
 import java.io.*;
 
 public class SequenceAlignment {
+    private static double getMemoryInKB() {
+        double total = Runtime.getRuntime().totalMemory();
+        return (total-Runtime.getRuntime().freeMemory())/10e3;
+    }
+    private static double getTimeInMilliseconds() {
+        return System.nanoTime()/10e6;
+    }
 
     public static void main(String[] args) throws IOException {
         File input = new File(args[0]);
@@ -39,6 +46,24 @@ public class SequenceAlignment {
         }
         strings[i] = sb.toString();
         System.out.println(strings[0] + " " + strings[1]);
+
+        double beforeUsedMem=getMemoryInKB();
+        double startTime = getTimeInMilliseconds();
+
+        Alignment basic = new Basic(strings[0],strings[1]).getAlignment();
+
+
+        double afterUsedMem = getMemoryInKB();
+        double endTime = getTimeInMilliseconds();
+        double totalUsage = afterUsedMem-beforeUsedMem;
+        double totalTime = endTime - startTime;
+
+        System.out.println(basic.cost);
+        System.out.println(basic.alignmentX);
+        System.out.println(basic.alignmentY);
+        System.out.println("total time: " + totalTime + " ms");
+        System.out.println("total memory: " + totalUsage + " kB");
+
 
         FileWriter writetoOuptut = new FileWriter("output.txt");
 
