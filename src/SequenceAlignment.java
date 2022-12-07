@@ -68,7 +68,11 @@ public class SequenceAlignment {
         FileWriter writetoOuptut = new FileWriter("output.txt");
 
         BufferedWriter writer = new BufferedWriter(writetoOuptut);
-        writer.write("");
+        writer.write("Cost of alignment: " + basic.cost + "\n");
+        writer.write("First String alignment: " + basic.alignmentX+ "\n");
+        writer.write("Second String alignment: " + basic.alignmentY+ "\n");
+        writer.write("Total time(ms): " + totalTime+ "\n");
+        writer.write("Total memory(kB): " + totalUsage+ "\n");
 
         writer.close();
 
