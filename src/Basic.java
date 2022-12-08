@@ -173,14 +173,4 @@ public class Basic {
         M[i][j].aX_i = aX_i;
         M[i][j].aY_j = aY_j;
     }
-
-    public int[] getLastColumn() {
-        if (M[X.length()][Y.length()].isEmpty) update(X.length(), Y.length());
-        int[] res = new int[M[0].length];
-        for (int i = 0; i < M[0].length; i++) {
-            res[i] = M[this.X.length()][i].cost;
-        }
-        return res;
-    }
-
 }
