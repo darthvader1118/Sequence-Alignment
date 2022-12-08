@@ -3,17 +3,17 @@ import java.io.*;
 public class Basic {
     private static double getMemoryInKB() {
         double total = Runtime.getRuntime().totalMemory();
-        return (total-Runtime.getRuntime().freeMemory())/10e3;
+        return (total - Runtime.getRuntime().freeMemory()) / 10e3;
     }
+
     private static double getTimeInMilliseconds() {
-        return System.nanoTime()/10e6;
+        return System.nanoTime() / 10e6;
     }
     //Usage:
     //  Alignment r = new Basic("AAA","TTTT").getAlignment();
     //  System.out.println(r.cost);
     //  System.out.println(r.alignmentX);
     //  System.out.println(r.alignmentY);
-
 
 
     public static void main(String[] args) throws IOException {
@@ -173,13 +173,14 @@ public class Basic {
         M[i][j].aX_i = aX_i;
         M[i][j].aY_j = aY_j;
     }
-    public int[] getLastColumn(){
+
+    public int[] getLastColumn() {
+        if (M[X.length()][Y.length()].isEmpty) update(X.length(), Y.length());
         int[] res = new int[M[0].length];
         for (int i = 0; i < M[0].length; i++) {
             res[i] = M[this.X.length()][i].cost;
-
         }
-        return  res;
+        return res;
     }
 
 }
