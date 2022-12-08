@@ -1,7 +1,7 @@
 import java.io.*;
 
 public class Efficient {
-    private Basic b;
+    private AlignmentEff a;
     private static double getMemoryInKB() {
         double total = Runtime.getRuntime().totalMemory();
         return (total-Runtime.getRuntime().freeMemory())/10e3;
@@ -9,13 +9,66 @@ public class Efficient {
     private static double getTimeInMilliseconds() {
         return System.nanoTime()/10e6;
     }
-
-    public Efficient(String x, String y){
-        b = new Basic(x,y);
+    public Efficient(){
+        this.a = new AlignmentEff(0,"","");
     }
-    public Alignment getAlignment(){
-        int splitX = b.X.length()/2;
-        return new Alignment(0,"","");
+
+
+    public AlignmentEff getEfficientAlignment(String x, String y){
+        AlignmentEff a = new AlignmentEff(0,"","");
+        if(x.length()==0){
+            for (int i = 0; i < y.length(); i++) {
+                a.alignmentX = a.alignmentX + '_';
+                a.alignmentY = a.alignmentY + y.charAt(i);
+                a.cost = a.cost + Value.delta;
+
+            }
+//            return;
+        }
+        else if(y.length() == 0){
+            for (int i = 0; i < x.length(); i++) {
+                a.alignmentX = a.alignmentX + x.charAt(i);
+                a.alignmentY = a.alignmentY + "_";
+                a.cost = a.cost + Value.delta;
+            }
+//            return;
+        }
+        else if(x.length() == 1 || y.length() == 1){
+            Alignment score = new Basic(x,y).getAlignment();
+            a.alignmentX = score.alignmentX;
+            a.alignmentY = score.alignmentY;
+            a.cost = score.cost;
+//            return;
+        }
+        else{
+            int xlen = x.length();
+            int xmid = xlen/2;
+            int ylen = y.length();
+            Basic scoreL = new Basic(x.substring(0,xmid), y);
+            scoreL.getAlignment();
+            int [] leftScores = scoreL.getLastColumn();
+            StringBuilder revX = new StringBuilder(x.substring(xmid));
+            StringBuilder revY = new StringBuilder(y);
+            revX.reverse();
+            revY.reverse();
+            Basic scoreR = new Basic(revX.toString(),revY.toString());
+            scoreR.getAlignment();
+            int [] rightScores = scoreR.getLastColumn();
+            int[] combined = new int[leftScores.length];
+            int min = Integer.MAX_VALUE;
+            int ymid = 0;
+            for (int i = 0; i < leftScores.length; i++) {
+                combined[i] = leftScores[i] + rightScores[rightScores.length - 1 - i];
+                if(combined[i] < min){
+                    min = combined[i];
+                    ymid = i;
+                }
+            }
+           a = AlignmentEff.sum(getEfficientAlignment(x.substring(0,xmid),y.substring(0,ymid)),getEfficientAlignment(x.substring(xmid),y.substring(ymid)));
+
+
+        }
+        return a;
     }
 
     public static void main(String[] args) throws IOException {
@@ -55,11 +108,11 @@ public class Efficient {
         }
         strings[i] = sb.toString();
         System.out.println(strings[0] + " " + strings[1]);
-
+        Efficient eff = new Efficient();
         double beforeUsedMem=getMemoryInKB();
         double startTime = getTimeInMilliseconds();
 
-        Alignment basic = new Basic(strings[0],strings[1]).getAlignment();
+       AlignmentEff a = eff.getEfficientAlignment(strings[0],strings[1]);
 
 
         double afterUsedMem = getMemoryInKB();
@@ -67,9 +120,9 @@ public class Efficient {
         double totalUsage = afterUsedMem-beforeUsedMem;
         double totalTime = endTime - startTime;
 
-        System.out.println(basic.cost);
-        System.out.println(basic.alignmentX);
-        System.out.println(basic.alignmentY);
+        System.out.println(a.cost);
+        System.out.println(a.alignmentX);
+        System.out.println(a.alignmentY);
         System.out.println("total time: " + totalTime + " ms");
         System.out.println("total memory: " + totalUsage + " kB");
         System.out.println("length of strings: " + (strings[0].length() + strings[1].length()));
@@ -78,9 +131,9 @@ public class Efficient {
 
         BufferedWriter writer = new BufferedWriter(writetoOuptut);
 
-        writer.write("Cost of alignment: " + basic.cost + "\n");
-        writer.write("First String alignment: " + basic.alignmentX+ "\n");
-        writer.write("Second String alignment: " + basic.alignmentY+ "\n");
+        writer.write("Cost of alignment: " + a.cost+ "\n");
+        writer.write("First String alignment: " + a.alignmentX+ "\n");
+        writer.write("Second String alignment: " + a.alignmentY+ "\n");
         writer.write("Total time(ms): " + totalTime+ "\n");
         writer.write("Total memory(kB): " + totalUsage+ "\n");
 
