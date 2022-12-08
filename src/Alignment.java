@@ -8,4 +8,5 @@ public class Alignment {
     public final int cost;
     public final String alignmentX;
     public final String alignmentY;
+
 }

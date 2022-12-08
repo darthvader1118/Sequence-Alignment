@@ -60,11 +60,12 @@ public class SequenceAlignment {
         System.out.println(basic.alignmentY);
         System.out.println("total time: " + totalTime + " ms");
         System.out.println("total memory: " + totalUsage + " kB");
-
+        System.out.println("length of strings: " + (strings[0].length() + strings[1].length()));
 
         FileWriter writeToOutput = new FileWriter("output.txt");
 
         BufferedWriter writer = new BufferedWriter(writeToOutput);
+
         writer.write("Cost of alignment: " + basic.cost + "\n");
         writer.write("First String alignment: " + basic.alignmentX + "\n");
         writer.write("Second String alignment: " + basic.alignmentY + "\n");

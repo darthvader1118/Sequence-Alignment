@@ -1,12 +1,6 @@
 import java.io.*;
 
 public class Basic {
-    //Usage:
-    //  Alignment r = new Basic("AAA","TTTT").getAlignment();
-    //  System.out.println(r.cost);
-    //  System.out.println(r.alignmentX);
-    //  System.out.println(r.alignmentY);
-
     private static double getMemoryInKB() {
         double total = Runtime.getRuntime().totalMemory();
         return (total - Runtime.getRuntime().freeMemory()) / 10e3;
@@ -15,6 +9,12 @@ public class Basic {
     private static double getTimeInMilliseconds() {
         return System.nanoTime() / 10e6;
     }
+    //Usage:
+    //  Alignment r = new Basic("AAA","TTTT").getAlignment();
+    //  System.out.println(r.cost);
+    //  System.out.println(r.alignmentX);
+    //  System.out.println(r.alignmentY);
+
 
     public static void main(String[] args) throws IOException {
         File input = new File(args[0]);
@@ -87,10 +87,13 @@ public class Basic {
         for (int i = 0; i < M.length; i++) {
             for (int j = 0; j < M[i].length; j++) {
                 M[i][j] = new ManagerEntry();
+
             }
         }
         M[0][0].isEmpty = false;
+
         M[0][0].cost = 0;
+
     }
 
     private static class ManagerEntry {
