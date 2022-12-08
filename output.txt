@@ -1,5 +1,5 @@
-Cost of alignment: 660
-First String alignment: ACA_T_ACTACTGAC_G_TGAC_AC_GAC_GG
-Second String alignment: _AT_ATAC__TATTA_ACGCGACGCG_ACG_G
-Total time(ms): 0.5435699820518494
+Cost of alignment: 1224
+First String alignment: _CACT_A_TAC_GA_TGTTGTTTGACTAC_GAC_GT_G__
+Second String alignment: TATTATACAATATTAT_C__CAA_C__CA_CAA_CA_CA_
+Total time(ms): 0.4842900037765503
 Total memory(kB): 269.4864

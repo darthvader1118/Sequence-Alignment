@@ -1,12 +1,21 @@
 import java.io.*;
 
-public class SequenceAlignment {
+public class Efficient {
+    private Basic b;
     private static double getMemoryInKB() {
         double total = Runtime.getRuntime().totalMemory();
         return (total-Runtime.getRuntime().freeMemory())/10e3;
     }
     private static double getTimeInMilliseconds() {
         return System.nanoTime()/10e6;
+    }
+
+    public Efficient(String x, String y){
+        b = new Basic(x,y);
+    }
+    public Alignment getAlignment(){
+        int splitX = b.X.length()/2;
+        return new Alignment(0,"","");
     }
 
     public static void main(String[] args) throws IOException {
@@ -20,7 +29,7 @@ public class SequenceAlignment {
             while((line = br.readLine())!=null){
 
 
-               // System.out.println(line);
+                // System.out.println(line);
                 if(!line.matches("[0-9]+")){
                     if(i != -1) {
                         strings[i] = sb.toString();
