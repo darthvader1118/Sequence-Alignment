@@ -91,7 +91,6 @@ public class Efficient {
             }
             oldCol = newCol;
             newCol = new int[y.length() + 1];
-            System.out.println();
         }
         return oldCol;
     }
