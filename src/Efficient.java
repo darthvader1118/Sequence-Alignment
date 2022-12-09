@@ -38,19 +38,21 @@ public class Efficient {
             int xlen = x.length();
             int xmid = xlen / 2;
             int ylen = y.length();
-            StringBuilder revX = new StringBuilder(x.substring(xmid));
-            StringBuilder revY = new StringBuilder(y);
-            revX.reverse();
-            revY.reverse();
-            int[] leftScores = getLastColumn(x.substring(0, xmid), y);
-            int[] rightScores = getLastColumn(revX.toString(), revY.toString());
-            int min = Integer.MAX_VALUE;
             int yMid = 0;
-            for (int i = 0; i <= ylen; i++) {
-                int combinedScore = leftScores[i] + rightScores[ylen - i];
-                if (combinedScore < min) {
-                    min = combinedScore;
-                    yMid = i;
+            {
+                StringBuilder revX = new StringBuilder(x.substring(xmid));
+                StringBuilder revY = new StringBuilder(y);
+                revX.reverse();
+                revY.reverse();
+                int[] leftScores = getLastColumn(x.substring(0, xmid), y);
+                int[] rightScores = getLastColumn(revX.toString(), revY.toString());
+                int min = Integer.MAX_VALUE;
+                for (int i = 0; i <= ylen; i++) {
+                    int combinedScore = leftScores[i] + rightScores[ylen - i];
+                    if (combinedScore < min) {
+                        min = combinedScore;
+                        yMid = i;
+                    }
                 }
             }
             Alignment aL = getEfficientAlignment(x.substring(0, xmid), y.substring(0, yMid));
