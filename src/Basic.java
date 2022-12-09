@@ -48,7 +48,7 @@ public class Basic {
             e.printStackTrace();
         }
         strings[i] = sb.toString();
-        System.out.println(strings[0] + " " + strings[1]);
+       // System.out.println(strings[0] + " " + strings[1]);
 
         double beforeUsedMem = getMemoryInKB();
         double startTime = getTimeInMilliseconds();
