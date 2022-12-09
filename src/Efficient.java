@@ -129,11 +129,20 @@ public class Efficient {
             e.printStackTrace();
         }
         strings[i] = sb.toString();
+        boolean isSwitched = false;
         //System.out.println(strings[0] + " " + strings[1]);
         double beforeUsedMem = getMemoryInKB();
         double startTime = getTimeInMilliseconds();
+        Alignment a;
+        if(strings[0].length()> strings[1].length()){
+             a = Efficient.getEfficientAlignment(strings[0], strings[1]);
+        }
+        else{
+            isSwitched = true;
+             a = Efficient.getEfficientAlignment(strings[1], strings[0]);
+        }
 
-        Alignment a = Efficient.getEfficientAlignment(strings[0], strings[1]);
+
 
 
         double afterUsedMem = getMemoryInKB();
@@ -141,20 +150,32 @@ public class Efficient {
         double totalUsage = afterUsedMem - beforeUsedMem;
         double totalTime = endTime - startTime;
 //
-//        System.out.println(a.cost);
-//        System.out.println(a.alignmentX);
-//        System.out.println(a.alignmentY);
-//        System.out.println("total time: " + totalTime + " ms");
-//        System.out.println("total memory: " + totalUsage + " kB");
-//        System.out.println("length of strings: " + (strings[0].length() + strings[1].length()));
+        System.out.println(a.cost);
+        System.out.println(a.alignmentX);
+        System.out.println(a.alignmentY);
+        System.out.println("total time: " + totalTime + " ms");
+        System.out.println("total memory: " + totalUsage + " kB");
+        System.out.println("length of strings: " + (strings[0].length() + strings[1].length()));
+
+        String first = "";
+        String second = "";
+        if(isSwitched){
+            first = a.alignmentY;
+            second = a.alignmentX;
+        }
+        else{
+            first = a.alignmentX;
+            second = a.alignmentY;
+        }
 
         FileWriter writetoOuptut = new FileWriter("output.txt");
 
         BufferedWriter writer = new BufferedWriter(writetoOuptut);
 
         writer.write("Cost of alignment: " + a.cost + "\n");
-        writer.write("First String alignment: " + a.alignmentX + "\n");
-        writer.write("Second String alignment: " + a.alignmentY + "\n");
+
+        writer.write("First String alignment: " + first+ "\n");
+        writer.write("Second String alignment: " + second + "\n");
         writer.write("Total time(ms): " + totalTime + "\n");
         writer.write("Total memory(kB): " + totalUsage + "\n");
 

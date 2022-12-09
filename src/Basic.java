@@ -61,12 +61,12 @@ public class Basic {
         double totalUsage = afterUsedMem - beforeUsedMem;
         double totalTime = endTime - startTime;
 
-//        System.out.println(basic.cost);
-//        System.out.println(basic.alignmentX);
-//        System.out.println(basic.alignmentY);
-//        System.out.println("total time: " + totalTime + " ms");
-//        System.out.println("total memory: " + totalUsage + " kB");
-//        System.out.println("length of strings: " + (strings[0].length() + strings[1].length()));
+        System.out.println(basic.cost);
+        System.out.println(basic.alignmentX);
+        System.out.println(basic.alignmentY);
+        System.out.println("total time: " + totalTime + " ms");
+        System.out.println("total memory: " + totalUsage + " kB");
+        System.out.println("length of strings: " + (strings[0].length() + strings[1].length()));
 
         FileWriter writeToOutput = new FileWriter(args[1]);
 
@@ -130,6 +130,7 @@ public class Basic {
         if (M[i][j].aX_i == '_') return getAlignmentX(i - 1, j) + '_';
         return getAlignmentX(i - 1, j - 1) + M[i][j].aX_i;
     }
+
 
     public String getAlignmentY(int i, int j) {
         if (M[i][j].isEmpty) update(i, j);
