@@ -140,13 +140,13 @@ public class Efficient {
         double endTime = getTimeInMilliseconds();
         double totalUsage = afterUsedMem - beforeUsedMem;
         double totalTime = endTime - startTime;
-
-        System.out.println(a.cost);
-        System.out.println(a.alignmentX);
-        System.out.println(a.alignmentY);
-        System.out.println("total time: " + totalTime + " ms");
-        System.out.println("total memory: " + totalUsage + " kB");
-        System.out.println("length of strings: " + (strings[0].length() + strings[1].length()));
+//
+//        System.out.println(a.cost);
+//        System.out.println(a.alignmentX);
+//        System.out.println(a.alignmentY);
+//        System.out.println("total time: " + totalTime + " ms");
+//        System.out.println("total memory: " + totalUsage + " kB");
+//        System.out.println("length of strings: " + (strings[0].length() + strings[1].length()));
 
         FileWriter writetoOuptut = new FileWriter("output.txt");
 
