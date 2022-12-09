@@ -66,7 +66,7 @@ public class Basic {
         System.out.println(basic.alignmentY);
         System.out.println("total time: " + totalTime + " ms");
         System.out.println("total memory: " + totalUsage + " kB");
-
+        System.out.println("length of strings: " + (strings[0].length() + strings[1].length()));
 
         FileWriter writeToOutput = new FileWriter(args[1]);
 
@@ -96,7 +96,7 @@ public class Basic {
 
     }
 
-    private static class ManagerEntry {
+    public class ManagerEntry {
         ManagerEntry() {
             isEmpty = true;
             cost = Integer.MAX_VALUE;
